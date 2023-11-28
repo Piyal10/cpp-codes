@@ -1,0 +1,45 @@
+ #include<bits/stdc++.h>
+ using namespace std;
+ void SELECTION_SORT(vector<int>A)
+ {
+     int n=A.size();
+     for(int i=0 ; i<n ; i++)
+     {
+         int min = A[i];
+         int pos = i;
+         for(int j=i+1 ; j<n ; j++)
+         {
+             if(A[j]<min)
+             {
+                 min= A[j];
+                 pos = j;
+             }
+         }
+         swap (A[i],A[pos]);
+     }
+     cout<<"Sorted Array: ";
+     for (int num: A)
+     {
+         cout<< num<<" ";
+     }
+     cout<<endl;
+ }
+ int main ()
+ {
+     vector <int>A;
+     cout<<"Input some numbers: \n";
+     int x;
+     for (int i = 0 ; i<5 ; i++)
+     {
+         cin>>x;
+         A.push_back(x);
+     }
+     cout<<"Original Array: ";
+     for(int num: A)
+     {
+         cout<<num<<" ";
+     }
+     cout<< endl;
+     SELECTION_SORT(A);
+     return 0;
+ }
