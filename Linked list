@@ -1,0 +1,181 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+    int data;
+    node *next;
+};
+node  *root=NULL;
+void printing()
+{
+    node *curr_node=root;
+    while (curr_node!=NULL)
+    {
+        cout<<curr_node->data<<endl;
+        curr_node=curr_node->next;
+    }
+}
+void Search()
+{
+    node *curr_node = root;
+    int a=0;
+    while (curr_node!=NULL)
+    {
+        if(curr_node->data==10)
+        {
+            cout<<"Found"<<endl;
+            a=1;
+
+        }
+       curr_node=curr_node->next;
+    }
+    if (a==0)
+    {
+        cout<<"Not Found"<<endl;
+    }
+    //return;
+}
+void print_last()
+{
+    node *curr_node=root;
+    while(curr_node->next!=NULL)
+    {
+        curr_node=curr_node->next;
+
+    }
+    cout<<"Last value: "<<curr_node->data<<endl;
+
+}
+void pre_last_node()
+{
+    node *curr_node=root;
+    while(curr_node->next->next!=NULL)
+    {
+        curr_node=curr_node->next;
+    }
+    cout<<"Previous last value: "<<curr_node->data<<endl;
+}
+void INSERT_FIRST(int val)
+{
+    node *temp;
+    temp=new node();
+    temp->data=val;
+    temp->next=NULL;
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else
+    {
+        temp->next=root;
+        root=temp;
+    }
+}
+/*void DELETE_FIRST()
+{
+    if (root == NULL)
+    {
+        cout << "List is empty. No node to delete." << endl;
+    }
+    else {
+        node* temp = root;
+        root = root->next;
+        delete temp;
+    }
+}*/
+
+void INSERT_LAST(int val)
+{
+    node *temp;
+    temp=new node();
+    temp->data=val;
+    temp->next=NULL;
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else
+    {
+        node*prev_node=root;
+        node*curr_node=root;
+        while(curr_node!=NULL)
+        {
+            prev_node= curr_node;
+            curr_node=curr_node->next;
+        }
+        prev_node->next=temp;
+    }
+}
+void DELETE_LAST()
+{
+
+
+
+        node*prev_node=root;
+        node*curr_node=root;
+        while(curr_node->next!=NULL)
+        {
+            prev_node= curr_node;
+            curr_node=curr_node->next;
+        }
+        prev_node->next=NULL;
+
+}
+int main()
+{
+    cout<<"Enter some integers: "<<endl;
+    for(int i=0 ; i<5 ; i++)
+    {
+        int n;
+        cin>>n;
+        INSERT_LAST(n);
+
+    }
+    cout<<"Printing the integers: "<<endl;
+    printing();
+    cout<<"After Inserting The Last Value: "<<endl;
+    INSERT_LAST(15);
+    printing();
+
+    cout<<"After Deleting The Last Value: "<<endl;
+    DELETE_LAST();
+    printing();
+
+    cout<<"After Inserting The First Value: "<<endl;
+    INSERT_FIRST(83);
+    printing();
+    //DELETE_FIRST();
+    cout<<"After Deleting The First Value: "<<endl<<endl;
+
+    printing();
+
+    Search();
+    print_last();
+    pre_last_node();
+
+
+    /*node *p,*q,*r, *s;
+    p=new node();
+    q=new node();
+    r=new node();
+    s=new node();
+
+    p->data=10;
+    q->data=15;
+    r->data=20;
+    s->data=25;
+
+    p->next=q;
+    q->next=r;
+    r->next=s;
+    s->next=NULL;
+
+    root=p;
+
+    printing();
+    Search();
+    print_last();
+    pre_last_node();*/
+    //cout<<p->data<<" "<<p->next->data<<" "<<p->next->next->data<<" "<<p->next->next->next->data<<" "<<endl;
+}
+
