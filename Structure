@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+#include <string>
+using namespace std;
+struct Student
+{
+    int id;
+    string name;
+    double cgpa;
+};
+void swap(Student* a, Student* b)
+{
+    Student temp = *a;
+    *a=*b;
+    *b=temp;
+}
+int partition(Student arr[], int lo, int hi)
+{
+    double pivot=arr[hi].cgpa;
+    int i=lo-1;
+
+    for (int j=lo; j<hi; j++)
+    {
+        if (arr[j].cgpa<=pivot)
+        {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i+1], &arr[hi]);
+    return i+1;
+}
+void quickSort(Student arr[], int lo, int hi)
+{
+    if (lo< hi)
+    {
+        int pi = partition(arr, lo, hi);
+        quickSort(arr, lo, pi - 1);
+        quickSort(arr, pi + 1, hi);
+    }
+}
+int main()
+{
+    Student students[]={
+        {83, "Piyal", 3.5},
+        {73, "Sabit", 3.69},
+        {46, "Nahid", 3.9},
+        {18, "Sami", 3.2},
+        {487,"Protik", 2.7}
+    };
+
+    int numStudents = sizeof(students)/sizeof(students[0]);
+    quickSort(students,0,numStudents-1);
+    cout << "Sorted array based on cgpa:"<<endl<<endl;
+    cout << "ID\tName\t\tCGPA"<<endl;
+    for (int i = 0; i < numStudents; i++) {
+        cout << students[i].id << "\t" << students[i].name << "\t\t" << students[i].cgpa << endl;
+    }
+    return 0;
+}
+
