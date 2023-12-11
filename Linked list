@@ -83,7 +83,11 @@ void INSERT_FIRST(int val)
         delete temp;
     }
 }*/
-
+void DELETE_FIRST()
+{
+    if ( root != NULL)
+        root = root -> next;
+}
 void INSERT_LAST(int val)
 {
     node *temp;
@@ -121,6 +125,70 @@ void DELETE_LAST()
         prev_node->next=NULL;
 
 }
+int list_size()
+{
+    int size = 0;
+    node *curr_node = root;
+    while (curr_node != NULL)
+    {
+        size++;
+        curr_node = curr_node->next;
+    }
+    return size;
+}
+
+void INSERT_ANYWHERE(int val, int position)
+{
+    if (position < 0 || position > list_size())
+    {
+        cout << "Invalid position." << endl;
+        return;
+    }
+
+    node *temp = new node();
+    temp->data = val;
+    temp->next = NULL;
+
+    if (position == 0)
+    {
+        temp->next = root;
+        root = temp;
+    }
+    else
+    {
+        node *prev_node = root;
+        for (int i = 0; i < position - 1; i++)
+        {
+            prev_node = prev_node->next;
+        }
+        temp->next = prev_node->next;
+        prev_node->next = temp;
+    }
+}
+void DELETE_ANYWHERE(int val)
+{
+    node *prev_node = NULL;
+    node *curr_node = root;
+
+    while (curr_node != NULL && curr_node->data != val)
+    {
+        prev_node = curr_node;
+        curr_node = curr_node->next;
+    }
+
+    if (curr_node == NULL)
+    {
+        cout << "Value not found.\n" << endl;
+        return;
+    }
+
+    if (prev_node == NULL)
+        root = curr_node->next;
+    else
+        prev_node->next = curr_node->next;
+
+    delete curr_node;
+}
 int main()
 {
     cout<<"Enter some integers: "<<endl;
@@ -144,11 +212,22 @@ int main()
     cout<<"After Inserting The First Value: "<<endl;
     INSERT_FIRST(83);
     printing();
-    //DELETE_FIRST();
-    cout<<"After Deleting The First Value: "<<endl<<endl;
 
+    cout<<"After Deleting The First Value: "<<endl<<endl;
+    DELETE_FIRST();
     printing();
 
+    //cout<<"Enter the value and position you wanna insert: "<<endl;
+    cout<<"Inserting anywhere: "<<endl;
+    INSERT_ANYWHERE(99,2);
+    printing();
+
+    cout<<"Delete anywhere: "<<endl;
+    DELETE_ANYWHERE(99);
+    printing();
+
+    cout<<"List Size: "<<list_size()<<endl;
+    list_size();
     Search();
     print_last();
     pre_last_node();
