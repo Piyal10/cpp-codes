@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define nl "\n"
+
 vector <int> Node [11];
 int level[11];
 int parent[11];
